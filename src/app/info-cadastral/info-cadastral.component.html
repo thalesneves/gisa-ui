@@ -1,0 +1,31 @@
+
+<div class="tabela">
+  <p-table [value]="usuarios" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Tipo</th>
+        <th>Plano</th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Telefone</th>
+        <th>Localização</th>
+        <th>Formação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario *ngIf="!!usuarios; else listaVazia">
+      <tr>
+        <td>{{usuario.tipo}}</td>
+        <td>{{usuario.plano}}</td>
+        <td>{{usuario.nome}}</td>
+        <td>{{usuario.cargo}}</td>
+        <td>{{usuario.telefone}}</td>
+        <td>{{usuario.localizacao}}</td>
+        <td>{{usuario.formacao}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <ng-template #listaVazia>
+    <p>Nenhuma transferência cadastrada</p>
+  </ng-template>
+</div>
