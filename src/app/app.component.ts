@@ -2,6 +2,7 @@ import { User } from './models/user.model';
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { InfoCadastralService } from './services/info-cadastral.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,9 @@ export class AppComponent {
 
   activeItem!: MenuItem;
 
-  constructor(private service: InfoCadastralService) {}
+  constructor(
+    private service: InfoCadastralService,
+    private router: Router) {}
 
   ngOnInit() {
     this.items = [
@@ -35,5 +38,9 @@ export class AppComponent {
     ];
 
     this.activeItem = this.items[0];
+  }
+
+  showNavBar(): boolean {
+    return this.router.url !== '/login';
   }
 }

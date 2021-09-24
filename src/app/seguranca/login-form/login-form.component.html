@@ -1,0 +1,24 @@
+<div class="grid" style="max-width: 400px; margin: auto">
+
+  <form>
+    <div class="col-12" style="text-align: center;">
+      <h1>Seja bem vindo ao GISA</h1>
+    </div>
+
+    <div class="col-12" style="margin-bottom: 15px;">
+      <input pInputText type="email" name="usuario" placeholder="E-mail"
+        class="inputfield w-full" ngModel required #usuario>
+    </div>
+
+    <div class="col-12" style="margin-bottom: 15px;">
+      <input pInputText type="password" name="senha" placeholder="Senha"
+        class="inputfield w-full" ngModel required #senha>
+    </div>
+
+    <div class="col-12" style="text-align: center;">
+      <button pButton type="button" label="Login" class="button"
+      (click)="login(usuario.value, senha.value); senha.value = '';"></button>
+    </div>
+  </form>
+
+</div>

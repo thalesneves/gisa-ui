@@ -12,7 +12,7 @@
         <th>Formação</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-usuario *ngIf="!!usuarios; else listaVazia">
+    <ng-template pTemplate="body" let-usuario *ngIf="usuarios; else listaVazia">
       <tr>
         <td>{{usuario.tipo}}</td>
         <td>{{usuario.plano}}</td>
