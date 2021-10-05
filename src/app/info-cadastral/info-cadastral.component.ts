@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './../models/user.model';
-import { InfoCadastralService } from './../services/info-cadastral.service';
+import { InfoCadastralService } from './info-cadastral.service';
 
 @Component({
   selector: 'app-info-cadastral',

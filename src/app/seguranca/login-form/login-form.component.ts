@@ -8,10 +8,13 @@ import { Component } from '@angular/core';
 })
 export class LoginFormComponent {
 
-  constructor(private auth: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   login(usuario: string, senha: string): void {
-    this.auth.login(usuario, senha);
+    this.auth.login(usuario, senha)
+      .catch(erro => {
+        console.log(erro);
+      });
   }
 
 }

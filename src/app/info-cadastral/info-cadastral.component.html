@@ -1,6 +1,7 @@
 
 <div class="tabela">
-  <p-table [value]="usuarios" responsiveLayout="scroll">
+  <p-table [value]="usuarios" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[2,5,10]"
+    styleClass="p-datatable-striped" responsiveLayout="scroll" [responsive]="true">
     <ng-template pTemplate="header">
       <tr>
         <th>Tipo</th>
@@ -12,7 +13,8 @@
         <th>Formação</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-usuario *ngIf="usuarios; else listaVazia">
+
+    <ng-template pTemplate="body" let-usuario *ngIf="!!usuarios; else listaVazia">
       <tr>
         <td>{{usuario.tipo}}</td>
         <td>{{usuario.plano}}</td>
@@ -22,6 +24,14 @@
         <td>{{usuario.localizacao}}</td>
         <td>{{usuario.formacao}}</td>
       </tr>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+    <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
     </ng-template>
   </p-table>
 

@@ -1,7 +1,7 @@
 import { User } from './models/user.model';
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { InfoCadastralService } from './services/info-cadastral.service';
+import { InfoCadastralService } from './info-cadastral/info-cadastral.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +11,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  title = 'gisa-front';
-
   items: MenuItem[] = [];
   users: User[] = [];
 
@@ -20,14 +18,15 @@ export class AppComponent {
 
   constructor(
     private service: InfoCadastralService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.items = [
       {
         label: 'Informações Cadastrais',
         icon: 'pi pi-fw pi-home',
-        routerLink: 'info-cadastral'
+        routerLink: 'infocadastral'
       },
       {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
       {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
@@ -43,4 +42,5 @@ export class AppComponent {
   showNavBar(): boolean {
     return this.router.url !== '/login';
   }
+
 }

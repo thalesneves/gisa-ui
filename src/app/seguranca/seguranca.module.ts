@@ -1,9 +1,11 @@
-import { AuthService } from './auth.service';
-import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { AuthService } from './auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { LoginFormComponent } from './login-form/login-form.component';
 
@@ -15,13 +17,14 @@ import { LoginFormComponent } from './login-form/login-form.component';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   exports: [
     LoginFormComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    JwtHelperService
   ]
 })
 export class SegurancaModule { }

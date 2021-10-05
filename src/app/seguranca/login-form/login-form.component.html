@@ -1,5 +1,7 @@
 <div class="grid" style="max-width: 400px; margin: auto">
 
+  {{ auth.jwtPayload | json }}
+
   <form>
     <div class="col-12" style="text-align: center;">
       <h1>Seja bem vindo ao GISA</h1>
@@ -16,8 +18,9 @@
     </div>
 
     <div class="col-12" style="text-align: center;">
-      <button pButton type="button" label="Login" class="button"
-      (click)="login(usuario.value, senha.value); senha.value = '';"></button>
+      <p-button type="button" label="Login" class="button"
+        (click)="login(usuario.value, senha.value); senha.value = '';"
+        [disabled]="usuario.value.length == 0 || senha.value.length == 0"></p-button>
     </div>
   </form>
 
