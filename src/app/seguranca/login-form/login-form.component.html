@@ -9,18 +9,23 @@
 
     <div class="col-12" style="margin-bottom: 15px;">
       <input pInputText type="email" name="usuario" placeholder="E-mail"
-        class="inputfield w-full" ngModel required #usuario>
+        class="inputfield w-full" ngModel email required #usuario="ngModel">
+
+      <div *ngIf="usuario.hasError('required') && usuario.dirty" class="error">Informe um email</div>
+      <div *ngIf="usuario.hasError('email') && usuario.dirty" class="error">Informe um email válido</div>
     </div>
 
     <div class="col-12" style="margin-bottom: 15px;">
       <input pInputText type="password" name="senha" placeholder="Senha"
-        class="inputfield w-full" ngModel required #senha>
+        class="inputfield w-full" ngModel required #senha="ngModel">
+
+      <div *ngIf="senha.invalid && senha.touched" class="error">Informe uma senha</div>
     </div>
 
     <div class="col-12" style="text-align: center;">
       <p-button type="button" label="Login" class="button"
-        (click)="login(usuario.value, senha.value); senha.value = '';"
-        [disabled]="usuario.value.length == 0 || senha.value.length == 0"></p-button>
+        (click)="login(usuario.value, senha.value);"
+        [disabled]="usuario.value == 0 || senha.value == 0"></p-button>
     </div>
   </form>
 

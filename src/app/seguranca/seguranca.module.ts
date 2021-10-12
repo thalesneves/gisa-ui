@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 import { AuthService } from './auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -18,6 +19,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
     ButtonModule,
     InputTextModule,
     FontAwesomeModule,
+    FormsModule
   ],
   exports: [
     LoginFormComponent

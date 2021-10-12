@@ -1,7 +1,6 @@
 import { User } from './models/user.model';
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { InfoCadastralService } from './info-cadastral/info-cadastral.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +16,6 @@ export class AppComponent {
   activeItem!: MenuItem;
 
   constructor(
-    private service: InfoCadastralService,
     private router: Router
   ) {}
 
