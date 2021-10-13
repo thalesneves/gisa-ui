@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 import { AuthService } from './auth.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-
 import { LoginFormComponent } from './login-form/login-form.component';
+
+export function tokenGetter(): string {
+  return localStorage.getItem('token')!;
+}
 
 @NgModule({
   declarations: [
@@ -16,10 +20,18 @@ import { LoginFormComponent } from './login-form/login-form.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: ['localhost:8082'],
+        disallowedRoutes: ['http://localhost:8082/oauth/token']
+      }
+    }),
+
     ButtonModule,
-    InputTextModule,
-    FontAwesomeModule,
-    FormsModule
+    InputTextModule
   ],
   exports: [
     LoginFormComponent

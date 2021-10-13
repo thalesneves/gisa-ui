@@ -26,12 +26,11 @@ export class AppComponent {
         icon: 'pi pi-fw pi-home',
         routerLink: 'infocadastral'
       },
-      {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-      {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
       {
-        label: 'Logout',
-        icon: 'pi pi-power-off'
+        label: 'Calendar',
+        icon: 'pi pi-fw pi-calendar',
       },
+      {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
     ];
 
     this.activeItem = this.items[0];

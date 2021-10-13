@@ -4,3 +4,8 @@ body {
   margin: 0;
   color: #404C51;
 }
+
+.p-menuitem-link-active {
+  background-color: #cbcdd4;
+}
+

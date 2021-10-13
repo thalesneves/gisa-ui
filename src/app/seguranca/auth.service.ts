@@ -30,12 +30,9 @@ export class AuthService {
         this.armazenarToken(token);
       })
       .catch(response => {
-
         if (response.status === 400) {
-          const responseJson = JSON.parse(JSON.stringify(response));
-
-          if (responseJson.error === 'invalid_grant') {
-            return Promise.reject('Usuário ou senha inválida!');
+          if (response.error.error === 'invalid_grant') {
+            return Promise.reject('Usuário ou senha inválida');
           }
         }
 

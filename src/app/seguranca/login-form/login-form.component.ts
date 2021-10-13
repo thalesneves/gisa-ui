@@ -1,5 +1,8 @@
-import { AuthService } from './../auth.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from './../auth.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
   selector: 'app-login-form',
@@ -8,13 +11,16 @@ import { Component } from '@angular/core';
 })
 export class LoginFormComponent {
 
-  constructor(public auth: AuthService) { }
+  constructor(
+    public auth: AuthService,
+    private errorHandler: ErrorHandlerService,
+    private router: Router
+  ) { }
 
-  login(usuario: string, senha: string): void {
+  public login(usuario: string, senha: string): void {
     this.auth.login(usuario, senha)
-      .catch(erro => {
-        console.log(erro);
-      });
+      .then(() => this.router.navigate(['/infocadastral']))
+      .catch(error => this.errorHandler.handle(error));
   }
 
 }

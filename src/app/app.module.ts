@@ -1,20 +1,20 @@
 import { AppComponent } from './app.component';
 
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { TabMenuModule } from 'primeng/tabmenu';
+import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+
+import { AppRoutingModule } from './app-routing.module';
 import { InfoCadastralModule } from './info-cadastral/info-cadastral.module';
-import { HttpClientModule } from '@angular/common/http';
 import { SegurancaModule } from './seguranca/seguranca.module';
-
-import localePt from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
-
-registerLocaleData(localePt, 'pt');
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,12 +24,15 @@ registerLocaleData(localePt, 'pt');
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
-    TabMenuModule,
+    MenubarModule,
+    ToastModule,
     InfoCadastralModule,
     HttpClientModule,
-    SegurancaModule
+    SegurancaModule,
+    CoreModule,
+    SharedModule
   ],
-  providers: [ { provide: LOCALE_ID, useValue: 'pt' } ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

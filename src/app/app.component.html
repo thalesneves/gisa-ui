@@ -1,7 +1,10 @@
 <header>
-  <p-tabMenu [model]="items" [activeItem]="activeItem"
-    *ngIf="showNavBar()"></p-tabMenu>
+  <p-menubar [model]="items" *ngIf="showNavBar()">
+    <button pButton label="Logout" icon="pi pi-power-off"></button>
+  </p-menubar>
 </header>
+
+<p-toast></p-toast>
 
 <main>
   <router-outlet></router-outlet>
