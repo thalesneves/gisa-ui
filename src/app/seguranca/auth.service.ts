@@ -1,6 +1,7 @@
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
 
     const body: string = `username=${user}&password=${password}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers })
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
       .then(response => {
         var token = this.extrairToken(response);
@@ -38,6 +39,37 @@ export class AuthService {
 
         return Promise.reject(response);
       });
+  }
+
+  public isAccessTokenInvalid(): boolean {
+    const token = localStorage.getItem('token');
+
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  public async getNewAccessToken(): Promise<void> {
+    let headers: HttpHeaders = new HttpHeaders;
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        var token = this.extrairToken(response);
+        this.armazenarToken(token);
+        console.log('Novo access token criado!');
+        return Promise.resolve();
+      })
+      .catch(response => {
+        console.log('Erro ao renovar token', response);
+        return Promise.resolve();
+      });
+  }
+
+  public hasPermission(permission: string): boolean {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permission);
   }
 
   private extrairToken(response: Object): string {

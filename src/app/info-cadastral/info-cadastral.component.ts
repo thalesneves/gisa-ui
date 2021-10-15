@@ -15,7 +15,7 @@ export class InfoCadastralComponent implements OnInit {
 
   constructor(
     private infoCadastralService: InfoCadastralService,
-    private errorHandler: ErrorHandlerService,
+    private errorHandler: ErrorHandlerService
     ) {
     this.usuarios = [];
   }
