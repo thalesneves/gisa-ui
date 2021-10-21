@@ -3,32 +3,33 @@ import { Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
-  public oauthTokenUrl: string = 'http://localhost:8082/oauth/token';
+  public oauthTokenUrl: string   = 'http://localhost:8083/oauth/token';
+
   public jwtPayload: any;
 
-  private jwtHelper = new JwtHelperService();
-
   constructor(
-    private http: HttpClient
+    private httpClient: HttpClient,
+    private jwtHelper: JwtHelperService
   ) {
     this.carregarToken();
   }
 
   public async login(user: string, password: string): Promise<void> {
-    let headers: HttpHeaders = new HttpHeaders;
+    let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body: string = `username=${user}&password=${password}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+    return this.httpClient.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
-      .then(response => {
-        var token = this.extrairToken(response);
-        this.armazenarToken(token);
+      .then((response: any) => {
+        this.armazenarToken(response['access_token']);
       })
       .catch(response => {
         if (response.status === 400) {
@@ -41,12 +42,6 @@ export class AuthService {
       });
   }
 
-  public isAccessTokenInvalid(): boolean {
-    const token = localStorage.getItem('token');
-
-    return !token || this.jwtHelper.isTokenExpired(token);
-  }
-
   public async getNewAccessToken(): Promise<void> {
     let headers: HttpHeaders = new HttpHeaders;
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -54,11 +49,10 @@ export class AuthService {
 
     const body = 'grant_type=refresh_token';
 
-    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+    return this.httpClient.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
-      .then(response => {
-        var token = this.extrairToken(response);
-        this.armazenarToken(token);
+      .then((response: any) => {
+        this.armazenarToken(response['access_token']);
         console.log('Novo access token criado!');
         return Promise.resolve();
       })
@@ -68,25 +62,32 @@ export class AuthService {
       });
   }
 
+  public isAccessTokenInvalid(): boolean {
+    const token = localStorage.getItem('token');
+
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
   public hasPermission(permission: string): boolean {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permission);
   }
 
-  private extrairToken(response: Object): string {
-    return JSON.parse(JSON.stringify(response)).access_token;
-  }
-
-  private armazenarToken(token: string) {
+  public armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
     localStorage.setItem('token', token);
   }
 
-  private carregarToken() {
+  public carregarToken() {
     const token = localStorage.getItem('token');
 
     if (token) {
       this.armazenarToken(token);
     }
+  }
+
+  public limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
 }

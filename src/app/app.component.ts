@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 import { AuthService } from './seguranca/auth.service';
+import { ErrorHandlerService } from './core/error-handler.service';
+import { LogoutService } from './seguranca/logout.service';
 import { User } from './models/user.model';
 
 @Component({
@@ -19,8 +21,10 @@ export class AppComponent {
   activeItem!: MenuItem;
 
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private authService: AuthService,
+    private errorHandler: ErrorHandlerService,
+    private logoutService: LogoutService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -44,7 +48,7 @@ export class AppComponent {
       icon: 'pi pi-fw pi-chart-line'
     };
 
-    if (this.auth.hasPermission('ROLE_FULL_ACCESS')) {
+    if (this.authService.hasPermission('ROLE_FULL_ACCESS')) {
       this.items.push(infoCadastral);
       this.items.push(servicoAssociado);
       this.items.push(gestao);
@@ -53,8 +57,14 @@ export class AppComponent {
     this.activeItem = this.items[0];
   }
 
-  showNavBar(): boolean {
+  public showNavBar(): boolean {
     return this.router.url !== '/login';
+  }
+
+  public logout(): void {
+    this.logoutService.logout()
+      .then(() => { this.router.navigate(['/login'])})
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

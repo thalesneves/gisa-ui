@@ -23,9 +23,9 @@
     </div>
 
     <div class="col-12" style="text-align: center;">
-      <p-button type="button" label="Login" class="button"
+      <button pButton type="submit" label="Login"
         (click)="login(usuario.value, senha.value);"
-        [disabled]="usuario.value == 0 || senha.value == 0"></p-button>
+        [disabled]="usuario.value == 0 || senha.value == 0"></button>
     </div>
   </form>
 

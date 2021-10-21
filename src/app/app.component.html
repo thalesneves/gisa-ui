@@ -1,6 +1,7 @@
 <header>
   <p-menubar [model]="items" *ngIf="showNavBar()">
-    <button pButton label="Logout" icon="pi pi-power-off"></button>
+    <button pButton type="submit" label="Logout" icon="pi pi-power-off"
+      (click)="logout()"></button>
   </p-menubar>
 </header>
 
