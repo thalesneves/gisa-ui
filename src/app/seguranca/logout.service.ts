@@ -15,10 +15,7 @@ export class LogoutService {
   ) { }
 
   public async logout(): Promise<void> {
-    let headers: HttpHeaders = new HttpHeaders;
-    headers = headers.append('Authorization', `Bearer ${localStorage.getItem('token')}`);
-
-    return this.httpClient.delete(this.tokensRevokeUrl, { headers })
+    return this.httpClient.delete(this.tokensRevokeUrl, { withCredentials: true })
       .toPromise()
       .then(() => {
         this.authService.limparAccessToken();

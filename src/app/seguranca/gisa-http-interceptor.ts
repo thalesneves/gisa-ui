@@ -22,6 +22,14 @@ export class GisaHttpInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    if (!req.headers.has('Authorization')) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+    }
+
     if (!req.url.includes('/oauth/token') && this.auth.isAccessTokenInvalid()) {
       console.log('Requisição HTTP com access token inválido. Obtendo novo token...');
 
