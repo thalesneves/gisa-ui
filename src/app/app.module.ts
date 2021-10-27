@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
@@ -21,9 +18,6 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    InputTextModule,
-    ButtonModule,
-    MenubarModule,
     ToastModule,
     InfoCadastralModule,
     HttpClientModule,

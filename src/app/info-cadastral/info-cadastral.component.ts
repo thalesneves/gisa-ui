@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-
-import { LazyLoadEvent } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
 
 import { ErrorHandlerService } from './../core/error-handler.service';
 import { InfoCadastralService } from './info-cadastral.service';
@@ -11,14 +9,12 @@ import { User } from './../models/user.model';
   templateUrl: './info-cadastral.component.html',
   styleUrls: ['./info-cadastral.component.css']
 })
-export class InfoCadastralComponent {
+export class InfoCadastralComponent implements OnInit {
 
   usuarios: User[];
   tipos: any[];
   planos: any[];
   categorias: any[];
-
-  loading: boolean;
 
   constructor(
     private infoCadastralService: InfoCadastralService,
@@ -43,21 +39,14 @@ export class InfoCadastralComponent {
       { name: 'Suspenso' },
       { name: 'Inativo' }
     ];
-
-    this.loading = true;
   }
 
-  loadUsers(event: LazyLoadEvent) {
-    this.loading = true;
-
-    setTimeout(() => {
-      this.infoCadastralService.getUsers()
-        .then(users => {
-          this.usuarios = users;
-          this.loading = false;
-        })
-        .catch(error => this.errorHandler.handle(error));
-    }, 1500);
-}
+  ngOnInit() {
+    this.infoCadastralService.getUsers()
+    .then(users => {
+      this.usuarios = users;
+    })
+    .catch(error => this.errorHandler.handle(error));
+  }
 
 }
