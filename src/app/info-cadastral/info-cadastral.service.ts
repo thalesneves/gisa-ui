@@ -8,7 +8,7 @@ import { User } from './../models/user.model';
 })
 export class InfoCadastralService {
 
-  private url = 'http://localhost:8082/infocadastral/users';
+  private url = 'http://localhost:11506/infocadastral/users';
 
   constructor(private httpClient: HttpClient) { }
 

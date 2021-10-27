@@ -63,7 +63,7 @@ export class AppComponent {
 
   public logout(): void {
     this.logoutService.logout()
-      .then(() => { this.router.navigate(['/login'])})
+      .then(() => { this.router.navigate(['/login']) })
       .catch(erro => this.errorHandler.handle(erro));
   }
 

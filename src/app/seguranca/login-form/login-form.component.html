@@ -1,26 +1,37 @@
-<div class="grid" style="max-width: 400px; margin: auto">
+<div class="p-grid p-fluid" style="max-width: 400px; margin: auto">
 
   <form>
     <div class="col-12" style="text-align: center;">
-      <h1>Seja bem vindo ao GISA</h1>
+      <h1>Bem-vindo a Boa Saúde</h1>
     </div>
 
     <div class="col-12" style="margin-bottom: 15px;">
-      <input pInputText type="email" name="usuario" placeholder="E-mail"
-        class="inputfield w-full" ngModel email required #usuario="ngModel">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input pInputText type="email" name="usuario" placeholder="E-mail"
+          class="inputfield w-full" ngModel email required #usuario="ngModel">
+      </div>
 
-      <div *ngIf="usuario.hasError('required') && usuario.dirty" class="error">Informe um email</div>
-      <div *ngIf="usuario.hasError('email') && usuario.dirty" class="error">Informe um email válido</div>
+      <div *ngIf="usuario.hasError('required') && usuario.dirty" class="error">
+        Informe um email
+      </div>
+
+      <div *ngIf="usuario.hasError('email') && usuario.dirty" class="error">
+        Informe um email válido
+      </div>
     </div>
 
     <div class="col-12" style="margin-bottom: 15px;">
-      <input pInputText type="password" name="senha" placeholder="Senha"
-        class="inputfield w-full" ngModel required #senha="ngModel">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+        <input pInputText type="password" name="senha" placeholder="Senha"
+          class="inputfield w-full" ngModel required #senha="ngModel">
+      </div>
 
       <div *ngIf="senha.invalid && senha.touched" class="error">Informe uma senha</div>
     </div>
 
-    <div class="col-12" style="text-align: center;">
+    <div class="col-12">
       <button pButton type="submit" label="Login"
         (click)="login(usuario.value, senha.value);"
         [disabled]="usuario.value == 0 || senha.value == 0"></button>

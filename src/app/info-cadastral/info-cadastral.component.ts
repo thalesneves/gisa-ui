@@ -12,12 +12,35 @@ import { User } from './../models/user.model';
 export class InfoCadastralComponent implements OnInit {
 
   usuarios: User[];
+  tipos: any[];
+  planos: any[];
+  categorias: any[];
+
+  selectedTipo: any;
 
   constructor(
     private infoCadastralService: InfoCadastralService,
     private errorHandler: ErrorHandlerService
     ) {
     this.usuarios = [];
+
+    this.tipos = [
+      { name: 'Prestador' },
+      { name: 'Associado' }
+    ];
+
+    this.planos = [
+      { name: 'N/A' },
+      { name: 'Individual' },
+      { name: 'Empresarial' }
+    ];
+
+    this.categorias = [
+      { name: 'N/A' },
+      { name: 'Ativo' },
+      { name: 'Suspenso' },
+      { name: 'Inativo' }
+    ];
   }
 
   ngOnInit(): void {

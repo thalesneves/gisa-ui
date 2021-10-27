@@ -1,8 +1,35 @@
 <div>
   <form>
-    <div class="col-12">
-      <input pInputText type="text" name="nome" placeholder="Nome"
-        class="inputfield w-full">
+    <div class="grid p-fluid" style="margin: auto;">
+      <div class="col-12 md:col-6 lg:col-6">
+        <input pInputText type="text" name="nome" placeholder="Nome"
+          class="inputfield w-full">
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <p-dropdown [options]="tipos" optionLabel="name" placeholder="Tipos"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <p-dropdown [options]="planos" optionLabel="name" placeholder="Planos"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-2">
+        <p-dropdown [options]="categorias" optionLabel="name" placeholder="Categorias"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <input pInputText type="text" name="formacao" placeholder="Formação"
+          class="inputfield w-full">
+      </div>
+
+      <div class="col-12 md:col-12 lg:col-3">
+        <button pButton type="submit" label="Filtrar"></button>
+      </div>
+
+      <div class="col-12 md:col-12 lg:col-3">
+        <button pButton type="submit" label="Limpar filtro"></button>
+      </div>
     </div>
   </form>
 </div>
@@ -15,13 +42,32 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th pResizableColumn>Tipo</th>
-        <th pResizableColumn>Plano</th>
-        <th pResizableColumn>Nome</th>
-        <th pResizableColumn>Cargo</th>
-        <th pResizableColumn>Telefone</th>
-        <th pResizableColumn>Localização</th>
-        <th pResizableColumn>Formação</th>
+        <th pResizableColumn style="width: 140px;" pSortableColumn="tipo">
+          Tipo <p-sortIcon field="tipo"></p-sortIcon>
+        </th>
+
+        <th pResizableColumn style="width: 140px;" pSortableColumn="plano">
+          Plano <p-sortIcon field="plano"></p-sortIcon>
+        </th>
+
+        <th pResizableColumn style="width: 140px;" pSortableColumn="categoria">
+          Categoria <p-sortIcon field="categoria"></p-sortIcon>
+        </th>
+
+        <th pResizableColumn pSortableColumn="nome">
+          Nome <p-sortIcon field="nome"></p-sortIcon>
+        </th>
+
+        <th pResizableColumn style="width: 160px;" pSortableColumn="cargo">
+          Cargo <p-sortIcon field="cargo"></p-sortIcon>
+        </th>
+
+        <th pResizableColumn style="width: 160px;">Telefone</th>
+        <th pResizableColumn style="width: 220px;">Localização</th>
+
+        <th pResizableColumn pSortableColumn="formacao">
+          Formação <p-sortIcon field="formacao"></p-sortIcon>
+        </th>
       </tr>
     </ng-template>
 
@@ -29,6 +75,7 @@
       <tr>
         <td>{{usuario.tipo}}</td>
         <td>{{usuario.plano}}</td>
+        <td>{{usuario.categoria}}</td>
         <td>{{usuario.nome}}</td>
         <td>{{usuario.cargo}}</td>
         <td>{{usuario.telefone}}</td>
@@ -38,11 +85,11 @@
     </ng-template>
 
     <ng-template pTemplate="paginatorleft">
-      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      <p-button type="button" styleClass="p-button-text"></p-button>
     </ng-template>
 
     <ng-template pTemplate="paginatorright">
-      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      <p-button type="button" styleClass="p-button-text"></p-button>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
@@ -50,6 +97,5 @@
         <td colspan="6">Nenhuma informação cadastrada</td>
       </tr>
     </ng-template>
-
   </p-table>
 </div>
