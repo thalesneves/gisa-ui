@@ -38,7 +38,7 @@
   <p-table [value]="usuarios" [paginator]="true" [rows]="10"
     [rowsPerPageOptions]="[2,5,10]" [resizableColumns]="true"
     styleClass="p-datatable-striped p-datatable-gridlines"
-    [responsive]="true">
+    [responsive]="true" [lazy]="true" (onLazyLoad)="loadUsers($event)" [loading]="loading">
 
     <ng-template pTemplate="header">
       <tr>
