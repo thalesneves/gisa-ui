@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
@@ -13,7 +13,7 @@ import { User } from './../../models/user.model';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
 
@@ -26,7 +26,19 @@ export class MenuComponent {
     private errorHandlerService: ErrorHandlerService,
     private logoutService: LogoutService,
     private router: Router
-  ) { this.buildMenu(); }
+  ) {
+    this.authService.emitter.subscribe(
+      resp => {
+        if (resp) {
+          this.buildMenu();
+        }
+      }
+    );
+  }
+
+  ngOnInit() {
+    this.buildMenu();
+  }
 
   public buildMenu(): void {
     const infoCadastral = {
@@ -45,10 +57,7 @@ export class MenuComponent {
       icon: 'pi pi-fw pi-chart-line'
     };
 
-    const resp = this.authService.hasPermission('ROLE_FULL_ACCESS');
-    console.log('TEM PERMISSÃO: ' + resp);
-
-    if (resp) {
+    if (this.authService.hasPermission('ROLE_FULL_ACCESS')) {
       this.items.push(infoCadastral);
       this.items.push(servicoAssociado);
       this.items.push(gestao);

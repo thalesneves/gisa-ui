@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class AuthService {
   public oauthTokenUrl: string   = 'http://localhost:8083/oauth/token';
 
   public jwtPayload: any;
+
+  public emitter = new BehaviorSubject(false);
 
   constructor(
     private httpClient: HttpClient,
@@ -30,6 +33,7 @@ export class AuthService {
       .toPromise()
       .then((response: any) => {
         this.armazenarToken(response['access_token']);
+        this.emitter.next(true);
       })
       .catch(response => {
         if (response.status === 400) {
@@ -73,6 +77,7 @@ export class AuthService {
   }
 
   public armazenarToken(token: string) {
+    console.log(token);
     this.jwtPayload = this.jwtHelper.decodeToken(token);
     localStorage.setItem('token', token);
   }
