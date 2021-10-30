@@ -8,12 +8,18 @@ import { User } from './../models/user.model';
 })
 export class InfoCadastralService {
 
-  private url = 'http://localhost:11506/infocadastral/users';
+  private url_get_users = 'http://localhost:11506/infocadastral/users';
 
   constructor(private httpClient: HttpClient) { }
 
   public async getUsers(): Promise<User[]> {
-    return this.httpClient.get<User[]>(this.url)
+    return this.httpClient.get<User[]>(this.url_get_users)
+      .toPromise()
+      .then(users => JSON.parse(JSON.stringify(users)));
+  }
+
+  public async getUsersByTipo(tipoUsuario: string): Promise<User[]> {
+    return this.httpClient.get<User[]>(this.url_get_users + "/tipo/" + tipoUsuario)
       .toPromise()
       .then(users => JSON.parse(JSON.stringify(users)));
   }

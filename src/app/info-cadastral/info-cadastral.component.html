@@ -3,34 +3,19 @@
 
   <form>
     <div class="grid p-fluid" style="margin: auto;">
-      <div class="col-12 md:col-6 lg:col-3">
-        <input pInputText type="text" name="nome" placeholder="Nome"
-          class="inputfield w-full">
-      </div>
-
-      <div class="col-12 md:col-6 lg:col-2">
-        <p-dropdown [options]="tipos" optionLabel="name" placeholder="Tipos"></p-dropdown>
-      </div>
-
-      <div class="col-12 md:col-6 lg:col-2">
-        <p-dropdown [options]="planos" optionLabel="name" placeholder="Planos"></p-dropdown>
-      </div>
-
-      <div class="col-12 md:col-6 lg:col-2">
-        <p-dropdown [options]="categorias" optionLabel="name" placeholder="Categorias"></p-dropdown>
-      </div>
-
-      <div class="col-12 md:col-6 lg:col-3">
-        <input pInputText type="text" name="formacao" placeholder="Formação"
-          class="inputfield w-full">
+      <div class="col-12 md:col-4 lg:col-3">
+        <p-dropdown [options]="tipos" optionLabel="name" placeholder="Tipos"
+          ngModel #tipo="ngModel" name="tipo"></p-dropdown>
       </div>
 
       <div class="col-12 md:col-12 lg:col-2">
-        <button pButton type="submit" label="Filtrar" icon="pi pi-search" iconPos="right"></button>
+        <button pButton type="submit" label="Filtrar" icon="pi pi-search" iconPos="right"
+        (click)="filtrar(tipo.value.name.toLowerCase());"></button>
       </div>
 
       <div class="col-12 md:col-12 lg:col-2">
-        <button pButton type="submit" label="Limpar filtro" icon="pi pi-trash" iconPos="right" class="p-button-outlined"></button>
+        <button pButton type="submit" label="Limpar filtro" icon="pi pi-trash" iconPos="right"
+          class="p-button-outlined" (click)="buscarUsuarios();"></button>
       </div>
     </div>
   </form>

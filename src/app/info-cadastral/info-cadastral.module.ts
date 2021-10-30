@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +16,7 @@ import { InfoCadastralComponent } from './info-cadastral.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ButtonModule,
     DropdownModule,
     InputTextModule,

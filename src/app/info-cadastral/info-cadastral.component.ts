@@ -42,7 +42,19 @@ export class InfoCadastralComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buscarUsuarios();
+  }
+
+  buscarUsuarios(): void {
     this.infoCadastralService.getUsers()
+    .then(users => {
+      this.usuarios = users;
+    })
+    .catch(error => this.errorHandler.handle(error));
+  }
+
+  filtrar(tipoUsuario: string): void {
+    this.infoCadastralService.getUsersByTipo(tipoUsuario)
     .then(users => {
       this.usuarios = users;
     })
