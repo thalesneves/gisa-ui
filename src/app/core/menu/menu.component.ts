@@ -30,6 +30,7 @@ export class MenuComponent implements OnInit {
     this.authService.emitter.subscribe(
       resp => {
         if (resp) {
+          this.items = [];
           this.buildMenu();
         }
       }
@@ -37,6 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.items = [];
     this.buildMenu();
   }
 
@@ -54,7 +56,8 @@ export class MenuComponent implements OnInit {
 
     const gestao = {
       label: 'Gestão e Estratégia',
-      icon: 'pi pi-fw pi-chart-line'
+      icon: 'pi pi-fw pi-chart-line',
+      routerLink: 'gestaoestrategia'
     };
 
     if (this.authService.hasPermission('ROLE_FULL_ACCESS')) {

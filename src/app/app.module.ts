@@ -8,6 +8,7 @@ import { ToastModule } from 'primeng/toast';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { GestaoEstrategiaModule } from './gestao-estrategia/gestao-estrategia.module';
 import { InfoCadastralModule } from './info-cadastral/info-cadastral.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { SharedModule } from './shared/shared.module';
@@ -18,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    GestaoEstrategiaModule,
     ToastModule,
     InfoCadastralModule,
     HttpClientModule,
