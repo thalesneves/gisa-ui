@@ -1,4 +1,3 @@
 <p-menubar [model]="items" *ngIf="showNavBar()">
-  <button pButton type="submit" label="Logout" icon="pi pi-power-off"
-    (click)="logout()" class="p-button-outlined p-button-danger"></button>
+  <p-splitButton label="{{userName}}" icon="pi pi-user" [model]="logoutMenu"></p-splitButton>
 </p-menubar>

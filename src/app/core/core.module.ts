@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { MessageService } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { ErrorHandlerService } from './error-handler.service';
 import { MenuComponent } from './menu/menu.component';
@@ -15,7 +16,8 @@ import { MenuComponent } from './menu/menu.component';
   imports: [
     ButtonModule,
     CommonModule,
-    MenubarModule
+    MenubarModule,
+    SplitButtonModule
   ],
   providers: [
     ErrorHandlerService,

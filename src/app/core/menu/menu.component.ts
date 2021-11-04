@@ -16,10 +16,13 @@ import { User } from './../../models/user.model';
 export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
+  logoutMenu: MenuItem[] = [];
 
   users: User[] = [];
 
   activeItem!: MenuItem;
+
+  userName: string = '';
 
   constructor(
     private authService: AuthService,
@@ -30,7 +33,6 @@ export class MenuComponent implements OnInit {
     this.authService.emitter.subscribe(
       resp => {
         if (resp) {
-          this.items = [];
           this.buildMenu();
         }
       }
@@ -38,11 +40,29 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.items = [];
     this.buildMenu();
   }
 
+  private extractUserName(payload: any): string {
+    return payload.user_name;
+  }
+
   public buildMenu(): void {
+    this.items = [];
+    this.logoutMenu = [];
+
+    const logoutMenu = {
+      label: 'Logout',
+      icon: 'pi pi-power-off',
+      command: () => this.logout()
+    }
+
+    this.logoutMenu.push(logoutMenu);
+
+    if (this.authService.jwtPayload){
+      this.userName = this.extractUserName(this.authService.jwtPayload);
+    }
+
     const infoCadastral = {
       label: 'Informações Cadastrais',
       icon: 'pi pi-fw pi-home',
