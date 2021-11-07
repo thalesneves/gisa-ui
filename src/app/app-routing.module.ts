@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'gestaoestrategia',
-    component: GestaoEstrategiaComponent
+    component: GestaoEstrategiaComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
