@@ -1,8 +1,24 @@
 <div class="grid p-fluid" style="margin: auto;">
 
-  <div class="col-12 md:col-12 lg:col-8">
-    <h3>Gráfico Básico</h3>
-    <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+  <div class="col-12 md:col-6 lg:col-6">
+    <h3>Consultas</h3>
+    <p-chart type="bar" [data]="basicDataBar"></p-chart>
+  </div>
+
+  <div class="col-12 md:col-6 lg:col-6">
+    <h3>Clientes</h3>
+    <p-chart type="line" [data]="basicDataLine"></p-chart>
+  </div>
+
+  <div class="col-12 md:col-4 lg:col-4">
+    <h3>Adimplentes e Inadimplentes</h3>
+    <p-chart type="doughnut" [data]="basicDataDoughnutChart" [style]="{'width': '40%'}"></p-chart>
+  </div>
+
+  <div class="col-12 md:col-8 lg:col-8">
+    <h3>Receitas e Despesas</h3>
+    <p-chart type="bar" [data]="basicDataBarHorizontal" [options]="horizontalOptions"></p-chart>
+    <h5 style="font-weight: normal;">Observações: valores de receitas e despesas cotados em milhões de R$</h5>
   </div>
 
 </div>
