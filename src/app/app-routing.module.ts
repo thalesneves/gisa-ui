@@ -1,3 +1,4 @@
+import { ServicosAssociadoComponent } from './servicos-associado/servicos-associado.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'gestaoestrategia',
     component: GestaoEstrategiaComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'servicosassociado',
+    component: ServicosAssociadoComponent,
     canActivate: [AuthGuard]
   }
 ];

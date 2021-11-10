@@ -12,9 +12,10 @@ import { GestaoEstrategiaModule } from './gestao-estrategia/gestao-estrategia.mo
 import { InfoCadastralModule } from './info-cadastral/info-cadastral.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { SharedModule } from './shared/shared.module';
+import { ServicosAssociadoComponent } from './servicos-associado/servicos-associado.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ServicosAssociadoComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

@@ -72,6 +72,7 @@ export class MenuComponent implements OnInit {
     const servicoAssociado = {
       label: 'Serviços ao Associado',
       icon: 'pi pi-fw pi-sort-amount-up',
+      routerLink: 'servicosassociado'
     };
 
     const gestao = {
