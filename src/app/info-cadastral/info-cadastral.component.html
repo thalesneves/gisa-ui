@@ -10,7 +10,7 @@
 
       <div class="col-12 md:col-12 lg:col-2">
         <button pButton type="submit" label="Filtrar" icon="pi pi-search" iconPos="right"
-        (click)="filtrar(tipo.value.name.toLowerCase());"></button>
+          class="p-button-outlined" (click)="filtrar(tipo.value.name.toLowerCase());"></button>
       </div>
 
       <div class="col-12 md:col-12 lg:col-2">
@@ -23,7 +23,7 @@
 
 <div class="tabela">
   <p-table [value]="usuarios" [paginator]="true" [rows]="10" [responsive]="true"
-    [rowsPerPageOptions]="[2,5,10]" [resizableColumns]="true"
+    [rowsPerPageOptions]="[2,5,10]" [resizableColumns]="true" [rowHover]="true"
     styleClass="p-datatable-striped p-datatable-gridlines">
 
     <ng-template pTemplate="header">
@@ -52,19 +52,16 @@
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="paginatorleft">
-      <p-button type="button" styleClass="p-button-text"></p-button>
-    </ng-template>
-
-    <ng-template pTemplate="paginatorright">
-      <p-button type="button" styleClass="p-button-text"></p-button>
-    </ng-template>
-
     <ng-template pTemplate="emptymessage">
       <tr>
         <td colspan="6">Nenhuma informação cadastrada</td>
       </tr>
     </ng-template>
 
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Há um total de {{usuarios ? usuarios.length : 0 }} registro(s).
+      </div>
+    </ng-template>
   </p-table>
 </div>

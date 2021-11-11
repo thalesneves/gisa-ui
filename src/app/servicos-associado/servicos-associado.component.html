@@ -1,3 +1,59 @@
 <div>
   <h3 class="col-12">Fluxos BPM</h3>
+
+  <form>
+    <div class="grid p-fluid" style="margin: auto;">
+      <div class="col-12 md:col-6 lg:col-3">
+        <button pButton type="submit" label="Incluir BPM" class="p-button-outlined"></button>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-3">
+        <a pButton label="Desenhar BPM" class="p-button-outlined"
+          (click)="loadBPMN('https://demo.bpmn.io/new')"></a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="tabela">
+  <p-table [value]="fluxos" [paginator]="true" [rows]="10" [responsive]="true"
+    [rowsPerPageOptions]="[2,5,10]" [resizableColumns]="true" [rowHover]="true"
+    styleClass="p-datatable-striped p-datatable-gridlines">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Fluxo</th>
+        <th>Nome do arquivo</th>
+        <th>Data</th>
+        <th style="width: 110px;"></th>
+        <th style="width: 110px;"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-fluxo>
+      <tr>
+        <td>{{fluxo.nomeFluxo}}</td>
+        <td>{{fluxo.nomeArquivo}}</td>
+        <td>{{fluxo.data}}</td>
+        <td style="text-align: center;">
+          <button pButton icon="pi pi-pencil" class="p-button-rounded" title="Editar"></button>
+        </td>
+        <td style="text-align: center;">
+          <button pButton icon="pi pi-trash" class="p-button-rounded" title="Apagar"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">Nenhum fluxo cadastrado</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Há um total de {{fluxos ? fluxos.length : 0 }} registro(s).
+      </div>
+    </ng-template>
+  </p-table>
 </div>

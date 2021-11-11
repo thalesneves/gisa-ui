@@ -11,11 +11,11 @@ import { CoreModule } from './core/core.module';
 import { GestaoEstrategiaModule } from './gestao-estrategia/gestao-estrategia.module';
 import { InfoCadastralModule } from './info-cadastral/info-cadastral.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
+import { ServicosAssociadoModule } from './servicos-associado/servicos-associado.module';
 import { SharedModule } from './shared/shared.module';
-import { ServicosAssociadoComponent } from './servicos-associado/servicos-associado.component';
 
 @NgModule({
-  declarations: [AppComponent, ServicosAssociadoComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -25,6 +25,7 @@ import { ServicosAssociadoComponent } from './servicos-associado/servicos-associ
     InfoCadastralModule,
     HttpClientModule,
     SegurancaModule,
+    ServicosAssociadoModule,
     CoreModule,
     SharedModule
   ],
