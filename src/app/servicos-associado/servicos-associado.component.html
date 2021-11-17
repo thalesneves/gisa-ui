@@ -3,13 +3,14 @@
 
   <form>
     <div class="grid p-fluid" style="margin: auto;">
-      <div class="col-12 md:col-6 lg:col-3">
-        <button pButton type="submit" label="Incluir BPM" class="p-button-outlined"></button>
+      <div class="col-12 md:col-6 lg:col-2">
+        <button pButton type="button" label="Incluir BPM" class="p-button-outlined"
+        (click)="uploadDialog()"></button>
       </div>
 
-      <div class="col-12 md:col-6 lg:col-3">
+      <div class="col-12 md:col-6 lg:col-2">
         <a pButton label="Desenhar BPM" class="p-button-outlined"
-          (click)="loadBPMN('https://demo.bpmn.io/new')"></a>
+          (click)="loadBPMN('https://app.diagrams.net/')"></a>
       </div>
     </div>
   </form>
@@ -22,9 +23,9 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th>Fluxo</th>
-        <th>Nome do arquivo</th>
-        <th>Data</th>
+        <th pSortableColumn="fluxo">Fluxo<p-sortIcon field="fluxo"></p-sortIcon></th>
+        <th pSortableColumn="nome">Nome do arquivo<p-sortIcon field="nome"></p-sortIcon></th>
+        <th pSortableColumn="data">Data<p-sortIcon field="data"></p-sortIcon></th>
         <th style="width: 110px;"></th>
         <th style="width: 110px;"></th>
       </tr>
@@ -39,7 +40,8 @@
           <button pButton icon="pi pi-pencil" class="p-button-rounded" title="Editar"></button>
         </td>
         <td style="text-align: center;">
-          <button pButton icon="pi pi-trash" class="p-button-rounded" title="Apagar"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded" title="Apagar"
+          (click)="confirmDialog()"></button>
         </td>
       </tr>
     </ng-template>
@@ -56,4 +58,18 @@
       </div>
     </ng-template>
   </p-table>
+
+  <p-confirmDialog #up header="Upload de Fluxo BPM" key="upload" [style]="{width: '50vw'}">
+    <ng-template pTemplate="footer">
+      <p-fileUpload chooseLabel="Carregar" cancelLabel="Cancelar" [showCancelButton]="false"
+      (uploadHandler)="uploadFile($event); up.reject();" [customUpload]="true"></p-fileUpload>
+    </ng-template>
+  </p-confirmDialog>
+
+  <p-confirmDialog #cd header="Exclusão" icon="pi pi-exclamation-circle" key="exclusion">
+    <ng-template pTemplate="footer">
+      <button type="button" pButton icon="pi pi-times" label="Não" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>
 </div>
