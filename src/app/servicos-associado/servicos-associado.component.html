@@ -62,7 +62,14 @@
   <p-confirmDialog #up header="Upload de Fluxo BPM" key="upload" [style]="{width: '50vw'}">
     <ng-template pTemplate="footer">
       <p-fileUpload chooseLabel="Carregar" cancelLabel="Cancelar" [showCancelButton]="false"
-      (uploadHandler)="uploadFile($event); up.reject();" [customUpload]="true"></p-fileUpload>
+      (uploadHandler)="uploadFile($event, flowName.value); up.reject();" [customUpload]="true"></p-fileUpload>
+
+      <input pInputText type="text" name="flowName" placeholder="Nome do Fluxo" style="margin-top: 15px;"
+          class="inputfield w-full" ngModel required #flowName="ngModel">
+
+      <div *ngIf="flowName.hasError('required') && flowName.dirty" class="error">
+        Informe o nome do fluxo
+      </div>
     </ng-template>
   </p-confirmDialog>
 

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FileUploadModule } from 'primeng/fileupload';
-import { HttpClientModule } from '@angular/common/http';
+import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 
 import { ServicosAssociadoComponent } from './servicos-associado.component';
@@ -14,10 +16,12 @@ import { ServicosAssociadoComponent } from './servicos-associado.component';
   declarations: [ServicosAssociadoComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    HttpClientModule,
     ButtonModule,
     ConfirmDialogModule,
     FileUploadModule,
-    HttpClientModule,
+    InputTextModule,
     TableModule
   ],
   providers: [ConfirmationService]

@@ -1,3 +1,4 @@
+import { ServicosAssociadoService } from './servicos-associado.service';
 import { Component, OnInit } from '@angular/core';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -13,7 +14,8 @@ export class ServicosAssociadoComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private servicosAssociadoService: ServicosAssociadoService
   ) {
     this.fluxos = [];
 
@@ -36,7 +38,7 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir?',
       key: 'exclusion',
-      accept: () => {this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'});}
+      accept: () => { this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'}); }
     });
   }
 
@@ -44,11 +46,9 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({ key: 'upload' });
   }
 
-  public uploadFile(event: any): void {
+  public uploadFile(event: any, flowName: string): void {
     if (event.files && event.files[0]) {
-      console.log("upload completo!");
-      console.log(event);
-      console.log('nome arquivo:', event.files[0].name)
+      this.servicosAssociadoService.uploadFile(event.files[0], flowName);
       this.messageService.add({severity:'success', detail:'Upload realizado com sucesso!'});
     } else {
       this.messageService.add({severity:'error', detail:'Houve problemas com o upload!'});
