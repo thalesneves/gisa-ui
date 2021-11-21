@@ -1,7 +1,10 @@
-import { ServicosAssociadoService } from './servicos-associado.service';
 import { Component, OnInit } from '@angular/core';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
+
+import { ErrorHandlerService } from './../core/error-handler.service';
+import { Flow } from './../models/flow.model';
+import { ServicosAssociadoService } from './servicos-associado.service';
 
 @Component({
   selector: 'app-servicos-associado',
@@ -10,36 +13,30 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class ServicosAssociadoComponent implements OnInit {
 
-  fluxos: any[];
+  fluxos: Flow[] = [];
 
   constructor(
     private confirmationService: ConfirmationService,
+    private errorHandlerService: ErrorHandlerService,
     private messageService: MessageService,
     private servicosAssociadoService: ServicosAssociadoService
-  ) {
-    this.fluxos = [];
+  ) {}
 
-    this.fluxos = [
-      {
-        nomeFluxo: 'Processo 1',
-        nomeArquivo: 'Processo_1.bpmn',
-        data: '10/11/2021 22:45:20'
-      }
-    ];
+  ngOnInit(): void {
+    this.buscarFluxos();
   }
 
-  ngOnInit(): void {}
+  public buscarFluxos(): void {
+    this.servicosAssociadoService.getAllFiles()
+    .then(data => {
+      this.fluxos = JSON.parse(JSON.stringify(data)).content;
+      console.log("Fluxos: " + this.fluxos.length);
+    })
+    .catch(error => this.errorHandlerService.handle(error));
+  }
 
   public loadBPMN(url: string): void {
     window.open(url, "_blank");
-  }
-
-  public confirmDialog(): void {
-    this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      key: 'exclusion',
-      accept: () => { this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'}); }
-    });
   }
 
   public uploadDialog(): void {
@@ -49,10 +46,23 @@ export class ServicosAssociadoComponent implements OnInit {
   public uploadFile(event: any, flowName: string): void {
     if (event.files && event.files[0]) {
       this.servicosAssociadoService.uploadFile(event.files[0], flowName);
+      this.buscarFluxos();
       this.messageService.add({severity:'success', detail:'Upload realizado com sucesso!'});
     } else {
       this.messageService.add({severity:'error', detail:'Houve problemas com o upload!'});
     }
+  }
+
+  public deleteDialog(id: number): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      key: 'exclusion',
+      accept: () => {
+        this.servicosAssociadoService.deleteFile(id);
+        this.buscarFluxos();
+        this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'});
+      }
+    });
   }
 
 }

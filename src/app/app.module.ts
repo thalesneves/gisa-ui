@@ -1,7 +1,9 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
 
 import { ToastModule } from 'primeng/toast';
 
@@ -13,6 +15,8 @@ import { InfoCadastralModule } from './info-cadastral/info-cadastral.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { ServicosAssociadoModule } from './servicos-associado/servicos-associado.module';
 import { SharedModule } from './shared/shared.module';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +33,7 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

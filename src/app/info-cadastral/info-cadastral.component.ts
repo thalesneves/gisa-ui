@@ -45,7 +45,7 @@ export class InfoCadastralComponent implements OnInit {
     this.buscarUsuarios();
   }
 
-  buscarUsuarios(): void {
+  public buscarUsuarios(): void {
     this.infoCadastralService.getUsers()
     .then(users => {
       this.usuarios = users;
@@ -53,7 +53,7 @@ export class InfoCadastralComponent implements OnInit {
     .catch(error => this.errorHandler.handle(error));
   }
 
-  filtrar(tipoUsuario: string): void {
+  public filtrar(tipoUsuario: string): void {
     this.infoCadastralService.getUsersByTipo(tipoUsuario)
     .then(users => {
       this.usuarios = users;
