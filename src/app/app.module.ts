@@ -23,11 +23,11 @@ registerLocaleData(localePt);
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     GestaoEstrategiaModule,
     ToastModule,
     InfoCadastralModule,
-    HttpClientModule,
     SegurancaModule,
     ServicosAssociadoModule,
     CoreModule,

@@ -6,6 +6,8 @@ import { ErrorHandlerService } from './../core/error-handler.service';
 import { Flow } from './../models/flow.model';
 import { ServicosAssociadoService } from './servicos-associado.service';
 
+import * as fileSaver from 'file-saver';
+
 @Component({
   selector: 'app-servicos-associado',
   templateUrl: './servicos-associado.component.html',
@@ -27,12 +29,10 @@ export class ServicosAssociadoComponent implements OnInit {
   }
 
   public buscarFluxos(): void {
-    this.servicosAssociadoService.getAllFiles()
-    .then(data => {
-      this.fluxos = JSON.parse(JSON.stringify(data)).content;
-      console.log("Fluxos: " + this.fluxos.length);
-    })
-    .catch(error => this.errorHandlerService.handle(error));
+    this.servicosAssociadoService.getAllFiles().subscribe(
+      data => this.fluxos = JSON.parse(JSON.stringify(data)).content,
+      error => this.errorHandlerService.handle(error)
+    );
   }
 
   public loadBPMN(url: string): void {
@@ -63,6 +63,15 @@ export class ServicosAssociadoComponent implements OnInit {
         this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'});
       }
     });
+  }
+
+  public downloadFile(id: number, fileName: string) {
+    this.servicosAssociadoService.downloadFile(id).subscribe((response: any) => {
+      let blob: any = new Blob([response], { type: 'draw.io' });
+			const url = window.URL.createObjectURL(blob);
+      // window.open(url);
+      fileSaver.saveAs(blob, fileName);
+    }), (error: any) => this.errorHandlerService.handle(error);
   }
 
 }
