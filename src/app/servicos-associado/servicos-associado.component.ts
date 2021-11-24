@@ -69,7 +69,6 @@ export class ServicosAssociadoComponent implements OnInit {
     this.servicosAssociadoService.downloadFile(id).subscribe((response: any) => {
       let blob: any = new Blob([response], { type: 'draw.io' });
 			const url = window.URL.createObjectURL(blob);
-      // window.open(url);
       fileSaver.saveAs(blob, fileName);
     }), (error: any) => this.errorHandlerService.handle(error);
   }
