@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ServicosAssociadoService {
 
-  private url_file = 'http://localhost:8084/servicosassociado';
+  private url_file = 'http://localhost:11506/servicosassociado';
 
   constructor(private httpClient: HttpClient) {}
 

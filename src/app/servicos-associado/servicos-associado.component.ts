@@ -43,6 +43,10 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({ key: 'upload' });
   }
 
+  public lookDialog(): void {
+    this.confirmationService.confirm({ key: 'look' });
+  }
+
   public uploadFile(event: any, flowName: string): void {
     if (event.files && event.files[0]) {
       this.servicosAssociadoService.uploadFile(event.files[0], flowName);
