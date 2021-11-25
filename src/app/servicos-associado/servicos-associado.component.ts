@@ -47,9 +47,9 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({ key: 'look' });
   }
 
-  public uploadFile(event: any, flowName: string): void {
+  public async uploadFile(event: any, flowName: string): Promise<void>  {
     if (event.files && event.files[0]) {
-      this.servicosAssociadoService.uploadFile(event.files[0], flowName);
+      await this.servicosAssociadoService.uploadFile(event.files[0], flowName);
       this.buscarFluxos();
       this.messageService.add({severity:'success', detail:'Upload realizado com sucesso!'});
     } else {
@@ -61,8 +61,8 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir?',
       key: 'exclusion',
-      accept: () => {
-        this.servicosAssociadoService.deleteFile(id);
+      accept: async () => {
+        await this.servicosAssociadoService.deleteFile(id);
         this.buscarFluxos();
         this.messageService.add({severity:'success', detail:'Exclusão realizada com sucesso!'});
       }
