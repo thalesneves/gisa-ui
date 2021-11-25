@@ -29,6 +29,7 @@
         <th style="width: 110px;"></th>
         <th style="width: 110px;"></th>
         <th style="width: 110px;"></th>
+        <th style="width: 110px;"></th>
       </tr>
     </ng-template>
 
@@ -37,6 +38,9 @@
         <td>{{fluxo.flowName}}</td>
         <td>{{fluxo.fileName}}</td>
         <td>{{fluxo.logDate | date:'dd/MM/y'}}</td>
+        <td style="text-align: center;">
+          <button pButton icon="pi pi-pencil" class="p-button-rounded" title="Editar" (click)="editDialog(fluxo.id)"></button>
+        </td>
         <td style="text-align: center;">
           <button pButton icon="pi pi-eye" class="p-button-rounded" title="Observar" (click)="lookDialog()"></button>
         </td>
@@ -89,5 +93,19 @@
     <div style="text-align: center;">
       <img src="/assets/img/processo_aprovacao_exame.jpg" alt="diagrama">
     </div>
+  </ng-template>
+</p-confirmDialog>
+
+<p-confirmDialog #edit header="Editar" key="edit" [style]="{width: '30vw'}">
+  <ng-template pTemplate="footer">
+    <input pInputText type="text" name="flowName" placeholder="Nome do Fluxo" style="margin-bottom: 15px;"
+        class="inputfield w-full" ngModel required #flowName="ngModel">
+
+    <div *ngIf="flowName.hasError('required') && flowName.dirty" class="error" style="margin-bottom: 15px;">
+      Informe o nome do fluxo
+    </div>
+
+    <button type="button" pButton icon="pi pi-save" label="Salvar" (click)="editFile(flowName.value); edit.reject()"
+    [disabled]="flowName.value == 0" title="Salvar"></button>
   </ng-template>
 </p-confirmDialog>

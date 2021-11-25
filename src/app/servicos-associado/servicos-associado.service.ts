@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -30,6 +30,15 @@ export class ServicosAssociadoService {
 
   public getAllFiles(): Observable<any> {
     return this.httpClient.get<any>(this.url_file);
+  }
+
+  public async editFile(flowId: number, flowName: string): Promise<Object> {
+    let headers: HttpHeaders = new HttpHeaders;
+    headers = headers.append('Content-Type', 'application/json');
+
+    const body = { flowName: flowName };
+
+    return this.httpClient.put(this.url_file + "/" + flowId, body, { headers }).toPromise();
   }
 
 }

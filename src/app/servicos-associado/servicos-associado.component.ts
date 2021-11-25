@@ -16,6 +16,7 @@ import * as fileSaver from 'file-saver';
 export class ServicosAssociadoComponent implements OnInit {
 
   fluxos: Flow[] = [];
+  flowId: number = 0;
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -47,6 +48,11 @@ export class ServicosAssociadoComponent implements OnInit {
     this.confirmationService.confirm({ key: 'look' });
   }
 
+  public editDialog(flowId: number): void {
+    this.confirmationService.confirm({ key: 'edit'});
+    this.flowId = flowId;
+  }
+
   public async uploadFile(event: any, flowName: string): Promise<void>  {
     if (event.files && event.files[0]) {
       await this.servicosAssociadoService.uploadFile(event.files[0], flowName);
@@ -69,12 +75,18 @@ export class ServicosAssociadoComponent implements OnInit {
     });
   }
 
-  public downloadFile(id: number, fileName: string) {
+  public downloadFile(id: number, fileName: string): void {
     this.servicosAssociadoService.downloadFile(id).subscribe((response: any) => {
       let blob: any = new Blob([response], { type: 'draw.io' });
 			const url = window.URL.createObjectURL(blob);
       fileSaver.saveAs(blob, fileName);
     }), (error: any) => this.errorHandlerService.handle(error);
+  }
+
+  public async editFile(fileName: string): Promise<void> {
+    await this.servicosAssociadoService.editFile(this.flowId, fileName);
+    this.buscarFluxos();
+    this.messageService.add({severity:'success', detail:'Atualização realizada com sucesso!'});
   }
 
 }
