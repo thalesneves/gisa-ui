@@ -15,13 +15,17 @@ export class InfoCadastralService {
   public async getUsers(): Promise<User[]> {
     return this.httpClient.get<User[]>(this.url_get_users)
       .toPromise()
-      .then(users => JSON.parse(JSON.stringify(users)));
+      .then(response => JSON.parse(JSON.stringify(response)).content);
   }
 
   public async getUsersByTipo(tipoUsuario: string): Promise<User[]> {
-    return this.httpClient.get<User[]>(this.url_get_users + "/tipo/" + tipoUsuario)
+    if(tipoUsuario == "todos") {
+      return this.getUsers();
+    }
+
+    return this.httpClient.get<User[]>(this.url_get_users + "/" + tipoUsuario)
       .toPromise()
-      .then(users => JSON.parse(JSON.stringify(users)));
+      .then(response => JSON.parse(JSON.stringify(response)).content);
   }
 
 }

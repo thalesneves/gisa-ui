@@ -23,6 +23,7 @@ export class InfoCadastralComponent implements OnInit {
     this.usuarios = [];
 
     this.tipos = [
+      { name: 'Todos' },
       { name: 'Prestador' },
       { name: 'Associado' }
     ];
@@ -55,9 +56,7 @@ export class InfoCadastralComponent implements OnInit {
 
   public filtrar(tipoUsuario: string): void {
     this.infoCadastralService.getUsersByTipo(tipoUsuario)
-    .then(users => {
-      this.usuarios = users;
-    })
+    .then(users => this.usuarios = users)
     .catch(error => this.errorHandler.handle(error));
   }
 
